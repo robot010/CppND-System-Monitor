@@ -1,5 +1,5 @@
 #include "processor.h"
-
+#include <iostream>
 
 using std::string; 
 
@@ -30,6 +30,7 @@ float Processor::Utilization() {
         res = nonidle/totaltime;
 
     }
+
     return res;
 
 }
