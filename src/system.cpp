@@ -19,7 +19,17 @@ Processor& System::Cpu() {
 }
 
 // TODO: Return a container composed of the system's processes
-vector<Process>& System::Processes() { return processes_; }
+vector<Process>& System::Processes() {
+
+    vector<int> int_pids = LinuxParser::Pids();
+    
+    for(int i:int_pids){
+        Process proc(i);
+        processes_.push_back(proc);
+    }
+
+    return processes_; 
+}
 
 // TODO: Return the system's kernel identifier (string)
 std::string System::Kernel() { 
