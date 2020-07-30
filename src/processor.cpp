@@ -5,7 +5,7 @@ using std::string;
 
 // TODO: Return the aggregate CPU utilization
 float Processor::Utilization() { 
-    int user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice; 
+    float user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice; 
     string cpu; 
     float res = 0;
 
@@ -18,16 +18,10 @@ float Processor::Utilization() {
 
         linestream>>cpu>>user>>nice>>system>>idle>>iowait>>irq>>softirq>>steal>>guest>>guest_nice;
 
-        int usertime = user - guest;
-        int nicetime = nice - guest_nice;
-        int idlealltime = idle + iowait;
-        int systemalltime = system + irq + softirq;
-        int virtualtime = guest + guest_nice;
-        int totaltime = usertime+nicetime+systemalltime+idlealltime+steal+virtualtime;
+        float total_idle = idle + iowait;
+        float total_nonidle = user+nice+system+irq+softirq+steal;
 
-        int nonidle = systemalltime + steal + usertime + nicetime + virtualtime;
-
-        res = nonidle/totaltime;
+        res = (total_nonidle)/(total_idle+total_nonidle);
 
     }
 
