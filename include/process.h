@@ -24,7 +24,7 @@ class Process {
 
   // TODO: Declare any necessary private members
  private:
-   int pid_;  
+   int pid_;
 };
 
 #endif
