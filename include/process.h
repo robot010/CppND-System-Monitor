@@ -10,8 +10,8 @@ It contains relevant attributes as shown below
 class Process {
  public:
   
-  Process(int pid){
-    pid_ = pid;
+  Process(int pid) : pid_(pid){
+    CpuUtilization();
   };
 
   int Pid();                               // TODO: See src/process.cpp
@@ -25,6 +25,7 @@ class Process {
   // TODO: Declare any necessary private members
  private:
    int pid_;
+   float CpuUtil_;
 };
 
 #endif

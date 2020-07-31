@@ -150,12 +150,12 @@ long LinuxParser::UpTime(int pid){
 }
 
 
-long LinuxParser::Total_Elapsed_Time(int pid) {
+float LinuxParser::Total_Elapsed_Time(int pid) {
 
     long system_uptime = UpTime();
     long startTime = UpTime(pid);
     long Hertz = sysconf(_SC_CLK_TCK);
-    long total_pid_elapsed_time = system_uptime - startTime/Hertz;
+    long total_pid_elapsed_time = (float)system_uptime - (float)startTime/(float)Hertz;
 
     return total_pid_elapsed_time;
 
@@ -165,9 +165,9 @@ long LinuxParser::Total_Elapsed_Time(int pid) {
 float LinuxParser::CpuUtilization(int pid) { 
 
     long total_pid_time_spent = ActiveJiffies(pid);
-    long total_time_elapsed = Total_Elapsed_Time(pid);
+    float total_time_elapsed = Total_Elapsed_Time(pid);
     long Hertz = sysconf(_SC_CLK_TCK);
-    float cpu_usage = total_pid_time_spent / Hertz / total_time_elapsed;
+    float cpu_usage = (float)total_pid_time_spent / (float)Hertz / total_time_elapsed;
 
     return cpu_usage;
 }
