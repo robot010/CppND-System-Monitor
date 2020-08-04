@@ -132,7 +132,7 @@ long LinuxParser::ActiveJiffies(int pid) {
 
 // TODO: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::UpTime(int pid){
+long LinuxParser::StartTime(int pid){
     string s_pid = std::to_string(pid);
     long start_time;
     string tmp, line;
@@ -153,7 +153,7 @@ long LinuxParser::UpTime(int pid){
 float LinuxParser::Total_Elapsed_Time(int pid) {
 
     long system_uptime = UpTime();
-    long startTime = UpTime(pid);
+    long startTime = StartTime(pid);
     long Hertz = sysconf(_SC_CLK_TCK);
     long total_pid_elapsed_time = (float)system_uptime - (float)startTime/(float)Hertz;
 
