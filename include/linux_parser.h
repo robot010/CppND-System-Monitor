@@ -53,6 +53,13 @@ std::string Ram(int pid);
 std::string Uid(int pid);
 std::string User(int pid);
 long int StartTime(int pid);
+
+// Generic Functions to minimize repetitive code
+template <typename T> T findValueByKey(std::string const &keyFilter, 
+                                       std::string const &filename);
+
+template <typename T> T getValueOfFile(std::string const &filename);
+
 };  // namespace LinuxParser
 
 #endif
