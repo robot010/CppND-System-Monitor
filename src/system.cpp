@@ -26,8 +26,8 @@ vector<Process>& System::Processes() {
     processes_.clear();
 
     for(int i:int_pids){
-        Process proc(i);
-        processes_.emplace_back(proc);
+        //Process proc(i); //Interesting!!
+        processes_.emplace_back(i);
     }
 
     std::sort(processes_.begin(), processes_.end());

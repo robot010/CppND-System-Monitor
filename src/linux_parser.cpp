@@ -103,8 +103,8 @@ vector<int> LinuxParser::Pids() {
 // TODO: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() { 
 
-    string memTotal = "MemTotal:";
-    string memFree = "MemFree:";
+    string memTotal = filterMemTotalString;
+    string memFree = filterMemFreeString;
   
     float MemTotal = findValueByKey<float>(memTotal, kMeminfoFilename);
     float MemFree = findValueByKey<float>(memFree, kMeminfoFilename);
@@ -188,12 +188,12 @@ float LinuxParser::CpuUtilization(int pid) {
 
 // TODO: Read and return the total number of processes
 int LinuxParser::TotalProcesses() { 
-    return findValueByKey<int>("processes", kStatFilename);               
+    return findValueByKey<int>(filterProcesses, kStatFilename);               
 }
 
 // TODO: Read and return the number of running processes
 int LinuxParser::RunningProcesses() { 
-    return findValueByKey<int>("procs_running", kStatFilename); 
+    return findValueByKey<int>(filterRunningProcesses, kStatFilename); 
 }
 
 // TODO: Read and return the command associated with a process
@@ -205,14 +205,13 @@ string LinuxParser::Command(int pid) {
 // TODO: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Ram(int pid) {
-    return std::to_string(findValueByKey<int>("VmSize:", std::to_string(pid) + kStatusFilename)/1024);
+    return std::to_string(findValueByKey<int>(filterProcMem, std::to_string(pid) + kStatusFilename)/1024);
  }
 
 // TODO: Read and return the user ID associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Uid(int pid) {  
-    
-    return findValueByKey<string>("Uid:", std::to_string(pid)+kStatusFilename);
+    return findValueByKey<string>(filterUID, std::to_string(pid)+kStatusFilename);
 }
 
 // TODO: Read and return the user associated with a process

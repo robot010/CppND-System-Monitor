@@ -23,7 +23,12 @@ float Process::CpuUtilization() {
 
 // TODO: Return the command that generated this process
 string Process::Command() {
-    return LinuxParser::Command(pid_);
+    string cmd = LinuxParser::Command(pid_);
+    if(cmd.length()>40){
+        string sub_string = cmd.substr(40);
+        return sub_string+"...";
+    }
+    return cmd;
 }
 
 // TODO: Return this process's memory utilization
